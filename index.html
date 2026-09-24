@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Husband Finder - Filter</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f3f6;
+            color: #222;
+            padding: 20px;
+        }
+
+        .filter-container {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .filter-title {
+            font-size: 23px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .filter-section {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 19px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 500;
+            border-bottom: 1px solid #e9ebee;
+            user-select: none;
+        }
+
+        .arrow {
+            font-size: 19px;
+            transition: transform 0.2s ease;
+        }
+
+        .filter-section.closed .arrow {
+            transform: rotate(180deg);
+        }
+
+        .filter-options {
+            padding: 12px 19px;
+        }
+
+        .filter-section.closed .filter-options {
+            display: none;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 32px;
+            margin: 2px 0;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-option input {
+            width: 16px;
+            height: 16px;
+            accent-color: #f04438;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .filter-option:hover {
+            color: #e44335;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        button {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .apply-btn {
+            background: #f04438;
+            color: white;
+        }
+
+        .apply-btn:hover {
+            background: #d9362b;
+        }
+
+        .reset-btn {
+            background: white;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .reset-btn:hover {
+            background: #f7f7f7;
+        }
+
+        .result {
+            display: none;
+            margin-top: 16px;
+            padding: 15px;
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .result h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .result ul {
+            padding-left: 20px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .filter-title {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="filter-container">
+
+        <h2 class="filter-title">Partner Filter</h2>
+
+        <div id="filters">
+
+            <!-- Location -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Location</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="ঢাকা">
+                        ঢাকা
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="চট্টগ্রাম">
+                        চট্টগ্রাম
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="সিলেট">
+                        সিলেট
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="রাজশাহী">
+                        রাজশাহী
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="খুলনা">
+                        খুলনা
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="বরিশাল">
+                        বরিশাল
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="রংপুর">
+                        রংপুর
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="ময়মনসিংহ">
+                        ময়মনসিংহ
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="অন্যান্য স্থান">
+                        অন্যান্য
+                    </label>
+                </div>
+            </div>
+
+            <!-- Habits -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Habits</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="বই পড়া">
+                        বই পড়া
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="ভ্রমণ">
+                        ভ্রমণ
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="খেলাধুলা">
+                        খেলাধুলা
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="গেমিং">
+                        গেমিং
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="অন্যান্য শখ">
+                        অন্যান্য
+                    </label>
+                </div>
+            </div>
+
+            <!-- TikTok -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>TikTok</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="TikTok তৈরি করে">
+                        TikTok তৈরি করে
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="TikTok তৈরি করে না">
+                        TikTok তৈরি করে না
+                    </label>
+                </div>
+            </div>
+
+            <!-- Job -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Job</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="Private Company">
+                        Private Company
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="Government Job">
+                        Government Job
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="Business">
+                        Business
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="Freelancer">
+                        Freelancer
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="Other Job">
+                        Other
+                    </label>
+                </div>
+            </div>
+
+            <!-- Skin Color -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Skin Color</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="ফর্সা">
+                        ফর্সা
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="শ্যামলা">
+                        শ্যামলা
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="মাঝারি">
+                        মাঝারি
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="অন্যান্য গায়ের রং">
+                        অন্যান্য
+                    </label>
+                </div>
+            </div>
+
+            <!-- Character -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Character & Values</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="সৎ">
+                        সৎ
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="দায়িত্বশীল">
+                        দায়িত্বশীল
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="পরিবারকে গুরুত্ব দেয়">
+                        পরিবারকে গুরুত্ব দেয়
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="সম্মানজনক আচরণ">
+                        সম্মানজনক আচরণ
+                    </label>
+                </div>
+            </div>
+
+            <!-- Smoking -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Smoking</span>
+                    <span class="arrow">⌃</span>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="ধূমপান করে">
+                        ধূমপান করে
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox" value="ধূমপান করে না">
+                        ধূমপান করে না
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button class="apply-btn" id="applyFilter">
+                Apply Filter
+            </button>
+
+            <button class="reset-btn" id="resetFilter">
+                Reset
+            </button>
+        </div>
+
+        <!-- Selected filters -->
+        <div class="result" id="result">
+            <h3>Selected Filters</h3>
+            <div id="selectedFilters"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Accordion open / close
+        const headers = document.querySelectorAll(".filter-header");
+
+        headers.forEach(header => {
+            header.addEventListener("click", () => {
+                const section = header.parentElement;
+                section.classList.toggle("closed");
+            });
+        });
+
+        // Apply filter
+        const applyBtn = document.getElementById("applyFilter");
+        const resetBtn = document.getElementById("resetFilter");
+        const result = document.getElementById("result");
+        const selectedFilters = document.getElementById("selectedFilters");
+
+        applyBtn.addEventListener("click", () => {
+            const sections = document.querySelectorAll(".filter-section");
+
+            let output = "";
+
+            sections.forEach(section => {
+                const title = section.querySelector(".filter-header span").textContent;
+                const checked = section.querySelectorAll(
+                    'input[type="checkbox"]:checked'
+                );
+
+                if (checked.length > 0) {
+                    output += `<p><strong>${title}:</strong></p><ul>`;
+
+                    checked.forEach(input => {
+                        const li = document.createElement("li");
+                        li.textContent = input.value;
+
+                        output += `<li>${li.textContent}</li>`;
+                    });
+
+                    output += "</ul>";
+                }
+            });
+
+            if (output === "") {
+                selectedFilters.textContent = "কোনো Filter নির্বাচন করা হয়নি।";
+            } else {
+                selectedFilters.innerHTML = output;
+            }
+
+            result.style.display = "block";
+        });
+
+        // Reset all filters
+        resetBtn.addEventListener("click", () => {
+            document.querySelectorAll(
+                '#filters input[type="checkbox"]'
+            ).forEach(input => {
+                input.checked = false;
+            });
+
+            result.style.display = "none";
+            selectedFilters.innerHTML = "";
+        });
+    </script>
+
+</body>
+</html>
